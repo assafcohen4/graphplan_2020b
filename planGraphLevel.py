@@ -1,4 +1,4 @@
-from typing import List, Any, Dict
+
 
 import util
 from action import Action
@@ -136,16 +136,6 @@ class PlanGraphLevel(object):
       self.propositionLayer.addProposition(new_prop)
 
 
-
-
-
-
-
-
-
-
-
-
     
   def updateMutexProposition(self):
     """
@@ -156,7 +146,15 @@ class PlanGraphLevel(object):
     """
     currentLayerPropositions = self.propositionLayer.getPropositions()
     currentLayerMutexActions =  self.actionLayer.getMutexActions()
+
     "*** YOUR CODE HERE ***"
+    #TODO autograde and this adds twice
+    for p1 in currentLayerPropositions:
+      for p2 in currentLayerPropositions:
+        if mutexPropositions(p1,p2,currentLayerMutexActions):
+          self.propositionLayer.addMutexProp(p1,p2)
+
+
     
   def expand(self, previousLayer):
     """
@@ -170,16 +168,29 @@ class PlanGraphLevel(object):
     previousPropositionLayer = previousLayer.getPropositionLayer()
     previousLayerMutexProposition = previousPropositionLayer.getMutexProps()
 
+
     "*** YOUR CODE HERE ***"
+
+    self.updateActionLayer(previousPropositionLayer)
+    self.updateMutexActions(previousLayerMutexProposition)
+    self.updatePropositionLayer()
+    self.updateMutexProposition()
+
+
+
+
             
   def expandWithoutMutex(self, previousLayer):
     """
     Questions 11 and 12
     You don't have to use this function
     """
-    previousLayerProposition = previousLayer.getPropositionLayer()
+    previousPropositionLayer = previousLayer.getPropositionLayer()
+    previousLayerMutexProposition = previousPropositionLayer.getMutexProps()
     "*** YOUR CODE HERE ***"
-    return 0
+    self.updateActionLayer(previousPropositionLayer)
+    self.updateMutexActions(previousLayerMutexProposition)
+    self.updatePropositionLayer()
 		
 def mutexActions(a1, a2, mutexProps):
   """
