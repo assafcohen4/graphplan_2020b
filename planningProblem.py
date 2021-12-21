@@ -1,4 +1,4 @@
-from typing import List, Any
+
 
 from proposition import Proposition
 from util import Pair
@@ -30,22 +30,25 @@ class PlanningProblem():
     PlanGraphLevel.setActions(self.actions)
     PlanGraphLevel.setProps(self.propositions)
     self._expanded = 0
+    print("HELLO")
    
     
   def getStartState(self):
     "*** YOUR CODE HERE ***"
+
     return self.initialState
     
   def isGoalState(self, state):
-    # type: (List[Proposition]) -> bool
+    # type: (list[Proposition]) -> bool
     """
     Hint: you might want to take a look at goalStateNotInPropLayer function
     """
     "*** YOUR CODE HERE ***"
+
     return not self.goalStateNotInPropLayer(state)
     
   def getSuccessors(self, state):
-    # type: (List[Proposition]) -> (List[Proposition], Action, int)
+    # type: (list[Proposition]) -> (list[Proposition], Action, int)
     """   
     For a given state, this should return a list of triples, 
     (successor, action, stepCost), where 'successor' is a 
@@ -58,26 +61,20 @@ class PlanningProblem():
     """
     self._expanded += 1
     "*** YOUR CODE HERE ***"
-    successors = []  # type: List[(List[Proposition], Action, int)]
+    print("in get successors")
+    successors = []  # type: list[(list[Proposition], Action, int)]
 
-    def getSuccessor(a):
-      # type: (Action) -> List[Proposition]
-      successor = state
-
-      for p in a.getDelete():
-        if p in successor:
-          successor.remove(p)
-
-      for p in a.getAdd():
-          if p not in successor:
-            successor.append(p)
-
-      return successor
-
-    #TODO is self.actions a list of actions and can be used?
     for a in self.actions:  # type: Action
-      if a.allPrecondsInList(state):
-        successors.append((getSuccessor(a), a, 1))
+      successorByCurrentAction = state  # type: list[Proposition]
+      if all(p in state for p in a.getPre()):
+        for p in a.getDelete():
+          if p in successorByCurrentAction:
+            successorByCurrentAction.remove(p)
+        for p in a.getAdd():
+          if p not in successorByCurrentAction:
+            successorByCurrentAction.append(p)
+        successors.append((successorByCurrentAction,a,1))
+
 
     return successors
 
