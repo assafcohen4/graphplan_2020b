@@ -3,6 +3,7 @@ def createDomainFile(domainFileName, n):
   pegs = ['a','b', 'c']
   domainFile = open(domainFileName, 'w') #use domainFile.write(str) to write to domainFile
   "*** YOUR CODE HERE ***"
+
   
   domainFile.close()  
         

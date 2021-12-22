@@ -93,15 +93,17 @@ class PlanGraphLevel(object):
     """
 
     currentLayerActions = self.actionLayer.getActions()
-    # TODO autograde
-    # TODO this adds each pair twice (a,b) (b,a)
+    # TODO was twice now changed check index
     "*** YOUR CODE HERE ***"
-    for a1 in currentLayerActions:
-      for a2 in currentLayerActions:
-        if mutexActions(a1,a2,previousLayerMutexProposition):
-          self.actionLayer.addMutexActions(a1,a2)
+    for i in range(0,len(currentLayerActions)):
+      for j in range (i, len(currentLayerActions)):
+        if mutexActions(currentLayerActions[i],currentLayerActions[j],previousLayerMutexProposition):
+          self.actionLayer.addMutexActions(currentLayerActions[i],currentLayerActions[j])
 
-
+    #for a1 in currentLayerActions:
+     # for a2 in currentLayerActions:
+       # if mutexActions(a1, a2, previousLayerMutexProposition):
+         # self.actionLayer.addMutexActions(a1, a2)
     
   def updatePropositionLayer(self):
     """
@@ -148,11 +150,16 @@ class PlanGraphLevel(object):
     currentLayerMutexActions =  self.actionLayer.getMutexActions()
 
     "*** YOUR CODE HERE ***"
-    #TODO autograde and this adds twice
-    for p1 in currentLayerPropositions:
-      for p2 in currentLayerPropositions:
-        if mutexPropositions(p1,p2,currentLayerMutexActions):
-          self.propositionLayer.addMutexProp(p1,p2)
+    #TODO was twice now changed check index
+    #for p1 in currentLayerPropositions:
+      #for p2 in currentLayerPropositions:
+        #if mutexPropositions(p1,p2,currentLayerMutexActions):
+          #self.propositionLayer.addMutexProp(p1,p2)
+
+    for i in range(0,len(currentLayerPropositions)):
+      for j in range(i, len(currentLayerPropositions)):
+        if mutexPropositions(currentLayerPropositions[i],currentLayerPropositions[j],currentLayerMutexActions):
+          self.propositionLayer.addMutexProp(currentLayerPropositions[i],currentLayerPropositions[j],currentLayerMutexActions)
 
 
     

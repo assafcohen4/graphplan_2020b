@@ -13,8 +13,8 @@ try:
   from search import aStarSearch
 
 except:
-  from  CPF.search import SearchProblem
-  from  CPF.search import aStarSearch
+  from  search import SearchProblem
+  from  search import aStarSearch
 
 class PlanningProblem():
   def __init__(self, domain, problem):
@@ -30,7 +30,7 @@ class PlanningProblem():
     PlanGraphLevel.setActions(self.actions)
     PlanGraphLevel.setProps(self.propositions)
     self._expanded = 0
-    print("HELLO")
+
    
     
   def getStartState(self):
