@@ -1,0 +1,267 @@
+Propositions:
+0_on_1 0_on_2 1_on_2 0_at_a 0_at_b 0_at_c 1_at_a 1_at_b 1_at_c 2_at_a 2_at_b 2_at_c 0_top 1_top 2_top 0_bottom 1_bottom 2_bottom a_empty b_empty c_empty 
+Actions:
+Name: m_0_a_on_1_b_on_2
+pre: 0_at_a 0_top 0_on_1 2_at_b 2_top
+add: 0_at_b 0_on_2 1_top
+del: 0_at_a 0_on_1 2_top
+Name: m_0_a_on_2_b_on_1
+pre: 0_at_a 0_top 0_on_2 1_at_b 1_top
+add: 0_at_b 0_on_1 2_top
+del: 0_at_a 0_on_2 1_top
+Name: m_0_a_on_1_c_on_2
+pre: 0_at_a 0_top 0_on_1 2_at_c 2_top
+add: 0_at_c 0_on_2 1_top
+del: 0_at_a 0_on_1 2_top
+Name: m_0_a_on_2_c_on_1
+pre: 0_at_a 0_top 0_on_2 1_at_c 1_top
+add: 0_at_c 0_on_1 2_top
+del: 0_at_a 0_on_2 1_top
+Name: m_0_b_on_1_a_on_2
+pre: 0_at_b 0_top 0_on_1 2_at_a 2_top
+add: 0_at_a 0_on_2 1_top
+del: 0_at_b 0_on_1 2_top
+Name: m_0_b_on_2_a_on_1
+pre: 0_at_b 0_top 0_on_2 1_at_a 1_top
+add: 0_at_a 0_on_1 2_top
+del: 0_at_b 0_on_2 1_top
+Name: m_0_b_on_1_c_on_2
+pre: 0_at_b 0_top 0_on_1 2_at_c 2_top
+add: 0_at_c 0_on_2 1_top
+del: 0_at_b 0_on_1 2_top
+Name: m_0_b_on_2_c_on_1
+pre: 0_at_b 0_top 0_on_2 1_at_c 1_top
+add: 0_at_c 0_on_1 2_top
+del: 0_at_b 0_on_2 1_top
+Name: m_0_c_on_1_a_on_2
+pre: 0_at_c 0_top 0_on_1 2_at_a 2_top
+add: 0_at_a 0_on_2 1_top
+del: 0_at_c 0_on_1 2_top
+Name: m_0_c_on_2_a_on_1
+pre: 0_at_c 0_top 0_on_2 1_at_a 1_top
+add: 0_at_a 0_on_1 2_top
+del: 0_at_c 0_on_2 1_top
+Name: m_0_c_on_1_b_on_2
+pre: 0_at_c 0_top 0_on_1 2_at_b 2_top
+add: 0_at_b 0_on_2 1_top
+del: 0_at_c 0_on_1 2_top
+Name: m_0_c_on_2_b_on_1
+pre: 0_at_c 0_top 0_on_2 1_at_b 1_top
+add: 0_at_b 0_on_1 2_top
+del: 0_at_c 0_on_2 1_top
+Name: m_0_a_on_1_b
+pre: 0_at_a 0_top 0_on_1 b_empty
+add: 0_at_b 0_bottom 1_top
+del: 0_at_a 0_on_1 b_empty
+Name: m_0_a_on_2_b
+pre: 0_at_a 0_top 0_on_2 b_empty
+add: 0_at_b 0_bottom 2_top
+del: 0_at_a 0_on_2 b_empty
+Name: m_0_a_on_1_c
+pre: 0_at_a 0_top 0_on_1 c_empty
+add: 0_at_c 0_bottom 1_top
+del: 0_at_a 0_on_1 c_empty
+Name: m_0_a_on_2_c
+pre: 0_at_a 0_top 0_on_2 c_empty
+add: 0_at_c 0_bottom 2_top
+del: 0_at_a 0_on_2 c_empty
+Name: m_0_b_on_1_a
+pre: 0_at_b 0_top 0_on_1 a_empty
+add: 0_at_a 0_bottom 1_top
+del: 0_at_b 0_on_1 a_empty
+Name: m_0_b_on_2_a
+pre: 0_at_b 0_top 0_on_2 a_empty
+add: 0_at_a 0_bottom 2_top
+del: 0_at_b 0_on_2 a_empty
+Name: m_0_b_on_1_c
+pre: 0_at_b 0_top 0_on_1 c_empty
+add: 0_at_c 0_bottom 1_top
+del: 0_at_b 0_on_1 c_empty
+Name: m_0_b_on_2_c
+pre: 0_at_b 0_top 0_on_2 c_empty
+add: 0_at_c 0_bottom 2_top
+del: 0_at_b 0_on_2 c_empty
+Name: m_0_c_on_1_a
+pre: 0_at_c 0_top 0_on_1 a_empty
+add: 0_at_a 0_bottom 1_top
+del: 0_at_c 0_on_1 a_empty
+Name: m_0_c_on_2_a
+pre: 0_at_c 0_top 0_on_2 a_empty
+add: 0_at_a 0_bottom 2_top
+del: 0_at_c 0_on_2 a_empty
+Name: m_0_c_on_1_b
+pre: 0_at_c 0_top 0_on_1 b_empty
+add: 0_at_b 0_bottom 1_top
+del: 0_at_c 0_on_1 b_empty
+Name: m_0_c_on_2_b
+pre: 0_at_c 0_top 0_on_2 b_empty
+add: 0_at_b 0_bottom 2_top
+del: 0_at_c 0_on_2 b_empty
+Name: m_1_a_on_2_b
+pre: 1_at_a 1_top 1_on_2 b_empty
+add: 1_at_b 1_bottom 2_top
+del: 1_at_a 1_on_2 b_empty
+Name: m_1_a_on_2_c
+pre: 1_at_a 1_top 1_on_2 c_empty
+add: 1_at_c 1_bottom 2_top
+del: 1_at_a 1_on_2 c_empty
+Name: m_1_b_on_2_a
+pre: 1_at_b 1_top 1_on_2 a_empty
+add: 1_at_a 1_bottom 2_top
+del: 1_at_b 1_on_2 a_empty
+Name: m_1_b_on_2_c
+pre: 1_at_b 1_top 1_on_2 c_empty
+add: 1_at_c 1_bottom 2_top
+del: 1_at_b 1_on_2 c_empty
+Name: m_1_c_on_2_a
+pre: 1_at_c 1_top 1_on_2 a_empty
+add: 1_at_a 1_bottom 2_top
+del: 1_at_c 1_on_2 a_empty
+Name: m_1_c_on_2_b
+pre: 1_at_c 1_top 1_on_2 b_empty
+add: 1_at_b 1_bottom 2_top
+del: 1_at_c 1_on_2 b_empty
+Name: m_0_a_b_on_1
+pre: 0_at_a 0_top 0_bottom 1_at_b 1_top
+add: 0_at_b 0_on_1 a_empty
+del: 0_at_a 0_bottom 1_top
+Name: m_0_a_b_on_2
+pre: 0_at_a 0_top 0_bottom 2_at_b 2_top
+add: 0_at_b 0_on_2 a_empty
+del: 0_at_a 0_bottom 2_top
+Name: m_0_a_c_on_1
+pre: 0_at_a 0_top 0_bottom 1_at_c 1_top
+add: 0_at_c 0_on_1 a_empty
+del: 0_at_a 0_bottom 1_top
+Name: m_0_a_c_on_2
+pre: 0_at_a 0_top 0_bottom 2_at_c 2_top
+add: 0_at_c 0_on_2 a_empty
+del: 0_at_a 0_bottom 2_top
+Name: m_0_b_a_on_1
+pre: 0_at_b 0_top 0_bottom 1_at_a 1_top
+add: 0_at_a 0_on_1 b_empty
+del: 0_at_b 0_bottom 1_top
+Name: m_0_b_a_on_2
+pre: 0_at_b 0_top 0_bottom 2_at_a 2_top
+add: 0_at_a 0_on_2 b_empty
+del: 0_at_b 0_bottom 2_top
+Name: m_0_b_c_on_1
+pre: 0_at_b 0_top 0_bottom 1_at_c 1_top
+add: 0_at_c 0_on_1 b_empty
+del: 0_at_b 0_bottom 1_top
+Name: m_0_b_c_on_2
+pre: 0_at_b 0_top 0_bottom 2_at_c 2_top
+add: 0_at_c 0_on_2 b_empty
+del: 0_at_b 0_bottom 2_top
+Name: m_0_c_a_on_1
+pre: 0_at_c 0_top 0_bottom 1_at_a 1_top
+add: 0_at_a 0_on_1 c_empty
+del: 0_at_c 0_bottom 1_top
+Name: m_0_c_a_on_2
+pre: 0_at_c 0_top 0_bottom 2_at_a 2_top
+add: 0_at_a 0_on_2 c_empty
+del: 0_at_c 0_bottom 2_top
+Name: m_0_c_b_on_1
+pre: 0_at_c 0_top 0_bottom 1_at_b 1_top
+add: 0_at_b 0_on_1 c_empty
+del: 0_at_c 0_bottom 1_top
+Name: m_0_c_b_on_2
+pre: 0_at_c 0_top 0_bottom 2_at_b 2_top
+add: 0_at_b 0_on_2 c_empty
+del: 0_at_c 0_bottom 2_top
+Name: m_1_a_b_on_2
+pre: 1_at_a 1_top 1_bottom 2_at_b 2_top
+add: 1_at_b 1_on_2 a_empty
+del: 1_at_a 1_bottom 2_top
+Name: m_1_a_c_on_2
+pre: 1_at_a 1_top 1_bottom 2_at_c 2_top
+add: 1_at_c 1_on_2 a_empty
+del: 1_at_a 1_bottom 2_top
+Name: m_1_b_a_on_2
+pre: 1_at_b 1_top 1_bottom 2_at_a 2_top
+add: 1_at_a 1_on_2 b_empty
+del: 1_at_b 1_bottom 2_top
+Name: m_1_b_c_on_2
+pre: 1_at_b 1_top 1_bottom 2_at_c 2_top
+add: 1_at_c 1_on_2 b_empty
+del: 1_at_b 1_bottom 2_top
+Name: m_1_c_a_on_2
+pre: 1_at_c 1_top 1_bottom 2_at_a 2_top
+add: 1_at_a 1_on_2 c_empty
+del: 1_at_c 1_bottom 2_top
+Name: m_1_c_b_on_2
+pre: 1_at_c 1_top 1_bottom 2_at_b 2_top
+add: 1_at_b 1_on_2 c_empty
+del: 1_at_c 1_bottom 2_top
+Name: m_0_a_b
+pre: 0_at_a 0_top 0_bottom b_empty
+add: 0_at_b a_empty
+del: 0_at_a b_empty
+Name: m_0_a_c
+pre: 0_at_a 0_top 0_bottom c_empty
+add: 0_at_c a_empty
+del: 0_at_a c_empty
+Name: m_0_b_a
+pre: 0_at_b 0_top 0_bottom a_empty
+add: 0_at_a b_empty
+del: 0_at_b a_empty
+Name: m_0_b_c
+pre: 0_at_b 0_top 0_bottom c_empty
+add: 0_at_c b_empty
+del: 0_at_b c_empty
+Name: m_0_c_a
+pre: 0_at_c 0_top 0_bottom a_empty
+add: 0_at_a c_empty
+del: 0_at_c a_empty
+Name: m_0_c_b
+pre: 0_at_c 0_top 0_bottom b_empty
+add: 0_at_b c_empty
+del: 0_at_c b_empty
+Name: m_1_a_b
+pre: 1_at_a 1_top 1_bottom b_empty
+add: 1_at_b a_empty
+del: 1_at_a b_empty
+Name: m_1_a_c
+pre: 1_at_a 1_top 1_bottom c_empty
+add: 1_at_c a_empty
+del: 1_at_a c_empty
+Name: m_1_b_a
+pre: 1_at_b 1_top 1_bottom a_empty
+add: 1_at_a b_empty
+del: 1_at_b a_empty
+Name: m_1_b_c
+pre: 1_at_b 1_top 1_bottom c_empty
+add: 1_at_c b_empty
+del: 1_at_b c_empty
+Name: m_1_c_a
+pre: 1_at_c 1_top 1_bottom a_empty
+add: 1_at_a c_empty
+del: 1_at_c a_empty
+Name: m_1_c_b
+pre: 1_at_c 1_top 1_bottom b_empty
+add: 1_at_b c_empty
+del: 1_at_c b_empty
+Name: m_2_a_b
+pre: 2_at_a 2_top 2_bottom b_empty
+add: 2_at_b a_empty
+del: 2_at_a b_empty
+Name: m_2_a_c
+pre: 2_at_a 2_top 2_bottom c_empty
+add: 2_at_c a_empty
+del: 2_at_a c_empty
+Name: m_2_b_a
+pre: 2_at_b 2_top 2_bottom a_empty
+add: 2_at_a b_empty
+del: 2_at_b a_empty
+Name: m_2_b_c
+pre: 2_at_b 2_top 2_bottom c_empty
+add: 2_at_c b_empty
+del: 2_at_b c_empty
+Name: m_2_c_a
+pre: 2_at_c 2_top 2_bottom a_empty
+add: 2_at_a c_empty
+del: 2_at_c a_empty
+Name: m_2_c_b
+pre: 2_at_c 2_top 2_bottom b_empty
+add: 2_at_b c_empty
+del: 2_at_c b_empty

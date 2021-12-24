@@ -1,0 +1,2 @@
+Initial state: 0_on_1 1_on_2 0_at_a 1_at_a 2_at_a 0_top 2_bottom b_empty c_empty 
+Goal state: 0_on_1 1_on_2 0_at_c 1_at_c 2_at_c 0_top 2_bottom a_empty b_empty 

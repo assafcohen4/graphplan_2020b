@@ -1,5 +1,4 @@
-
-
+from actionLayer import ActionLayer
 from proposition import Proposition
 from util import Pair
 import copy
@@ -35,7 +34,6 @@ class PlanningProblem():
     
   def getStartState(self):
     "*** YOUR CODE HERE ***"
-
     return self.initialState
     
   def isGoalState(self, state):
@@ -61,20 +59,21 @@ class PlanningProblem():
     """
     self._expanded += 1
     "*** YOUR CODE HERE ***"
-    print("in get successors")
     successors = []  # type: list[(list[Proposition], Action, int)]
 
-    for a in self.actions:  # type: Action
-      successorByCurrentAction = state  # type: list[Proposition]
-      if all(p in state for p in a.getPre()):
-        for p in a.getDelete():
-          if p in successorByCurrentAction:
-            successorByCurrentAction.remove(p)
+    for a in self.actions: #type: Action
+      if a.allPrecondsInList(state):
+        successor = ([],a,1)
+        for p in state:
+          if p not in successor[0]:
+            successor[0].append(p)
         for p in a.getAdd():
-          if p not in successorByCurrentAction:
-            successorByCurrentAction.append(p)
-        successors.append((successorByCurrentAction,a,1))
-
+          if p not in successor[0]:
+            successor[0].append(p)
+        for p in a.getDelete():
+          if p in successor[0]:
+            successor[0].remove(p)
+        successors.append(successor)
 
     return successors
 
@@ -105,94 +104,71 @@ class PlanningProblem():
       add.append(prop)
       delete = []
       act = Action(name,precon,add,delete, True)
-      self.actions.append(act)  
-      
-def maxLevel(state, problem):
-  # type: (List[Proposition], PlanningProblem) -> float
-  """
-  The heuristic value is the number of layers required to expand all goal propositions.
-  If the goal is not reachable from the state your heuristic should return float('inf')  
-  A good place to start would be:
-  propLayerInit = PropositionLayer()          #create a new proposition layer
-  for prop in state:
-    propLayerInit.addProposition(prop)        #update the proposition layer with the propositions of the state
-  pgInit = PlanGraphLevel()                   #create a new plan graph level (level is the action layer and the propositions layer)
-  pgInit.setPropositionLayer(propLayerInit)   #update the new plan graph level with the the proposition layer
-  """
-  "*** YOUR CODE HERE ***"
-  propLayerInit = PropositionLayer()  # create a new proposition layer
-  for prop in state:
-    propLayerInit.addProposition(prop)  # update the proposition layer with the propositions of the state
-  pgInit = PlanGraphLevel()  # create a new plan graph level (level is the action layer and the propositions layer)
-  pgInit.setPropositionLayer(propLayerInit)  # update the new plan graph level with the the proposition layer
-  
-  
-  counter = 0
-  pgCurrent = pgInit
+      self.actions.append(act)
 
-  while problem.goal not in pgCurrent.getPropositionLayer().getPropositions():
-    pgPrevious = PlanGraphLevel()
-    pgPrevious.setPropositionLayer(pgCurrent.getPropositionLayer())
-    pgPrevious.setActionLayer(pgCurrent.getActionLayer())
-    pgCurrent.expandWithoutMutex(pgCurrent)
-    counter += 1
-    
-    if pgCurrent.getPropositionLayer().__eq__(pgPrevious.getPropositionLayer())\
-            and pgCurrent.getActionLayer().__eq__(pgPrevious.getActionLayer()):
+
+
+
+
+def hasLeveledOff(Graph, level):
+  if level == 0:
+    return False
+  return len(Graph[level].getPropositionLayer().getPropositions()) == len(Graph[level - 1].getPropositionLayer().getPropositions())
+
+
+def maxLevel(state, problem): # type: (List[Proposition], PlanningProblem) -> float
+
+  propLayerInit = PropositionLayer()
+  for p in state:
+    propLayerInit.addProposition(p)
+
+  level = PlanGraphLevel()
+  level.setPropositionLayer(propLayerInit)
+  level_props = level.getPropositionLayer().getPropositions()
+
+  graphPlan = []
+  graphPlan.append(level)
+
+  while not problem.isGoalState(level_props):
+    if hasLeveledOff(graphPlan, len(graphPlan) - 1):
       return float('inf')
-      
-  return counter
 
+    next_level = PlanGraphLevel()
+    next_level.expandWithoutMutex(level)
+    level_props = next_level.getPropositionLayer().getPropositions()
+    graphPlan.append(next_level)
+
+  return len(graphPlan) - 1
   
 def levelSum(state, problem):
-  """
-  The heuristic value is the sum of sub-goals level they first appeared.
-  If the goal is not reachable from the state your heuristic should return float('inf')
-  """
-  "*** YOUR CODE HERE ***"
-  propLayerInit = PropositionLayer()  # create a new proposition layer
-  for prop in state:
-    propLayerInit.addProposition(prop)  # update the proposition layer with the propositions of the state
-  pgInit = PlanGraphLevel()  # create a new plan graph level (level is the action layer and the propositions layer)
-  pgInit.setPropositionLayer(propLayerInit)  # update the new plan graph level with the the proposition layer
 
-  counter = 0
-  goal_counter = 0
-  pgCurrent = pgInit
-  
-  discovered_goals = set()  # type: set[Proposition]
+  propLayerInit = PropositionLayer()
 
-  while problem.goal not in pgCurrent.getPropositionLayer().getPropositions():
+  for p in state:
+    propLayerInit.addProposition(p)
 
-    pgPrevious = PlanGraphLevel()
-    pgPrevious.setPropositionLayer(pgCurrent.getPropositionLayer())
-    pgPrevious.setActionLayer(pgCurrent.getActionLayer())
+  level = PlanGraphLevel()
+  level.setPropositionLayer(propLayerInit)
+  level_props = level.getPropositionLayer().getPropositions()
+  graphPlan = [level]
+  goals_levels = {p.getName(): None for p in problem.goal}  # type: dict[Proposition,int]
 
-    pgCurrent.expandWithoutMutex(pgCurrent)
-    counter += 1
-
-    for prop in pgCurrent.getPropositionLayer().getPropositions():
-      if prop in problem.goal and prop not in discovered_goals:
-        discovered_goals.add(prop)
-        goal_counter += counter
-
-
-
-    if pgCurrent.getPropositionLayer().__eq__(pgPrevious.getPropositionLayer()) \
-            and pgCurrent.getActionLayer().__eq__(pgPrevious.getActionLayer()):
+  while None in goals_levels.values():
+    if hasLeveledOff(graphPlan, len(graphPlan) - 1):
       return float('inf')
 
-  return goal_counter
+    for p in problem.goal:
+      if p in level_props and goals_levels[p.getName()] is None:
+        goals_levels[p.getName()] = len(graphPlan) - 1
+
+    next_level = PlanGraphLevel()
+    next_level.expandWithoutMutex(level)
+    level_props = next_level.getPropositionLayer().getPropositions()
+    graphPlan.append(next_level)
+
+  return sum(goals_levels.values())
   
-def isFixed(Graph, level):
-  """
-  Checks if we have reached a fixed point,
-  i.e. each level we'll expand would be the same, thus no point in continuing
-  """
-  if level == 0:
-    return False  
-  return len(Graph[level].getPropositionLayer().getPropositions()) == len(Graph[level - 1].getPropositionLayer().getPropositions())  
-      
+
 if __name__ == '__main__':
   import sys
   import time
